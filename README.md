@@ -32,13 +32,7 @@ Currently, a large number of remote sensing images with different resolutions ar
 
 The following code was written in Python 3.8 and run in Windows 10.
 
-The above requirements list contains all packages that <b>must</b> be installed in order for the code to run correctly.
-
-To install these packages, either copy the above into a text file, or download the requirements.txt file within the repository and install using pip as shown below
-
-```setup
-pip install -r requirements.txt
-```
+The requirements list below contains all packages that <b>must</b> be installed in order for the code to run correctly.
 
 ```
 rtools==9.0.9048
@@ -55,6 +49,12 @@ scipy~=1.5.2
 matplotlib~=3.3.2
 pillow~=7.2.0
 scikit-image~=0.17.2
+```
+
+To install these packages, either copy the above into a text file, or download the requirements.txt file within the repository and install using pip as shown below
+
+```setup
+pip install -r requirements.txt
 ```
 
 Note: While operations can be performed using a CPU based tensorflow installation, it will be extremely slow and therefore a GPU based installation is recommended.
