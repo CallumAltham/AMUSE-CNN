@@ -4,4 +4,4 @@ This repository is the official implementation of [Adaptive Multiscale Superpixe
 
 Code to build and train the networks are provided. The model takes in a provided remote sensing image and produces a colour coded output depending on provided categories.
 
-![AMUSE-CNN Architecture](images/amuse_cnn.pdf "AMUSE CNN Architecture")
+![AMUSE-CNN Architecture](images/amuse_cnn.jpg "AMUSE CNN Architecture")
