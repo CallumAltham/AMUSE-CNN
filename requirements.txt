@@ -1,0 +1,14 @@
+rtools==9.0.9048
+rasterio~=1.1.7
+numpy~=1.19.4
+shapely~=1.7.1
+affine~=2.3.0
+scikit-learn~=0.23.2
+tensorflow~=2.4.1
+tqdm~=4.50.2
+fiona~=1.8.17
+geopandas~=0.8.1
+scipy~=1.5.2
+matplotlib~=3.3.2
+pillow~=7.2.0
+scikit-image~=0.17.2

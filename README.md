@@ -14,9 +14,26 @@ It is not advised to run this code right now and any responsibility will fall on
 
 
 ![AMUSE-CNN Architecture](images/amuse_cnn.jpg "AMUSE CNN Architecture")
+AMUSE-CNN Architecture
+
+![MS-CNN Architecture](images/ms_cnn.gif "Multi-Scale CNN Architecture")
+Multi-Scale CNN Architecture
 
 ## Published Results
 
+![Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Lagos ](images/lagos_res_table.gif "Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Lagos")
+Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Lagos
+
+![2000 × 2000 pixel Lagos image region and the corresponding GT as well as LU classification for all the methods. ](images/lagos_predictions.gif "2000 × 2000 pixel Lagos image region and the corresponding GT as well as LU classification for all the methods.")
+2000 × 2000 pixel Lagos image region and the corresponding GT as well as LU classification for all the methods.
+
+<br><br>
+
+![Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Kano ](images/kano_res_table.gif "Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Kano")
+Classification Accuracy (%) Comparison Among OBIA-SVM, Pixelwise CNN, OCNN, MS-CNN, and AMUSE-CNN for Kano
+
+![2000 × 2000 pixel Kano image region and the corresponding GT as well as LU classification for all the methods.](images/kano_predictions.gif "2000 × 2000 pixel Kano image region and the corresponding GT as well as LU classification for all the methods.")
+2000 × 2000 pixel Kano image region and the corresponding GT as well as LU classification for all the methods.
 
 ## Paper
 
@@ -64,9 +81,16 @@ Tensorflow will require additional support to make use of GPU support. Details o
 
 [Tensorflow GPU Support](https://tensorflow.org/install/gpu)
 
-## Dataset
-
 ## Dataset Generation
+During training of any model, a set of five dataset files will be generated containing all geo_data information in a format readable by the models. These files are as follows:
+
+- `lc_am.pkl` (Container file holding all land cover annotations)
+- `lu_am.pkl` (Container file holding all land use annotations)
+- `relevant_pixels.pkl` (Container file holding all land cover probabilities in a memory-efficient manner)
+- `rgb_c.pkl` (Container file containing all RGB data regarding geo_data)
+- `seg_c.pkl` (Container file containing all segment information from geo_data)
+
+Please do not attempt to edit these files or the code that creates them as this will prevent further code from running.
 
 ## Quick-start 
 
@@ -167,13 +191,16 @@ Following this, it will load the menu mentioned above in which you are required 
 
 #
 
+> :warning: 
+
 ## Adaptive Multi Scale (AMUSE)
 
-<br>
 
 ### Warning: This script will create a large amount of data to complete operations. If using 3+ window sizes, please ensure that a large amount of storage space is available in the specified directory (around 50-100GB+).
 
 <br>
+
+> :warning: 
 
 This script is used for the complete runtime of the adaptive MS-CNN system.
 
@@ -286,14 +313,17 @@ Shown below is only an example of elements contained within a single folder in e
 
 Other folders are also available within these directories corresponding to alternative window sizes and datasets that can be explored at the readers discretion.
 
-- `figures/` (Directory for created figures)
+- `figures/` (Directory for created figures) <br>*NOTE: Some figure folders are currently being rearranged in accordance with changes to plotting figures code and therefore this folder is currently unavailable*
     - `architectures/` (Complete MS-CNN Architecture Diagrams)
-    - `colored_tiles/` (...)
+    <!--- `colored_tiles/` (...)-->
     - `complete_lu/` (Complete TIF Image Annotated With LU Classes)
     - `plot_annotations/` (All Annotations For All K-Folds)
     - `plot_data/` (Kano and Lagos Data Images)
-    - `plot_segments/` (Segments Of Images From Segmentation File)<br><br>
-- `geo_data/` (Directory for geospatial data)
+    - `image_region` (Singular coordinate defined region)
+    - `plot_segments/` (Segments Of Images From Segmentation File)
+    - `lu_prc` (Precision Recall Curves)
+    - `lu_roc` (Reciever Operating Characteristic Curves)<br><br>
+- `geo_data/` (Directory for geospatial data)<br>*NOTE: These data files are too large for storage on GitHub and can instead be found on the [Edge Hill Figshare platform](#)*
     - `K_R3C4/` (Kano data for R3C4 tile)
         - `lc_annotations/` (Land cover annotations directory)
         - `lu_annotations/` (Land use annotations directory)
@@ -305,61 +335,68 @@ Other folders are also available within these directories corresponding to alter
         - `lu_annotations/` (Land use annotations directory)
         - `NI_Kano_19Q2_V0_R6C6.tif` (Data file)
         - `segments.*` (Mean-shift segmentation files/superpixels)<br><br>
+- `raw_data_info\` (Raw information regarding `geo_data` files)
 - `models/` (Directory for saving models)
-    - `adaptive_multiscale` (Contains AMUSE models and files)
-        - `run-X` (Contains AMUSE models and files for run X of system)
-        - `kano` (Contains AMUSE model files trained on Kano data)
-            - `new_data` (Contains all new data generated during final stage of AMUSE system)
-            - `temp_data` (Contains temporary data used during the majority vote system)
-            - `temp_shapefiles` (Contains temporary shapefile assignment folders for use in training)
-            - `combined_accuracies_over_5_folds_all_ws` (Contains complete accuracies found through all models)
     - `multi_scale/` (Contains MS-CNN  models and files)
-        - `32/` (Contains MS-CNN model files with window size 32)
+        - `48/` (Contains MS-CNN model files with window size 48)
             - `Kano/` (Contains model files trained on Kano data)
-                - `Kano_multiscale_X.h5` (Saved MS-CNN model for Xth fold of K-fold cross-validation)
-                - `Kano_multiscale_X_benchmark.h5` (Saved OCNN file for Xth fold of K-fold cross-validation)
+                - `multiscale_X.h5` (Saved MS-CNN model for Xth fold of K-fold cross-validation)
                 - `seg_c_p_c_ms_X.npy` (Saved segment LU probabilities from MS-CNN output of Xth fold of K-fold cross-validation)
-                - `seg_c_p_c_ms_benchmark_X.npy` (Saved segment LU probabilities from OCNN output of Xth fold of K-fold cross-validation)
                 - `per_class_accuracy_average.json` (Average accuracy achieved using MS-CNN for each LU class (average refers to average of K-fold cross-validation experiments))
                 - `oa_averaged_over_k_folds.json` (Average validation set area correctly labelled by MS-CNN (average refers to average of K-fold cross-validation experiments))
-                - `benchmark_per_class_accuracy_average.json` (Average accuracy achieved using OCNN for each LU class (average refers to average of K-fold cross-validation experiments))
-                - `benchmark_oa_averaged_over_k_folds.json` (Average validation set area correctly labelled by OCNN (average refers to average of K-fold cross-validation experiments))<br><br>
+                <br><br>
     - `obia_svm/` (Contains OBIA-SVM models and files)
         - `Kano/` (Contains model files trained on Kano data)
             - `obia_svm_model_X.pkl` (Saved OBIA-SVM model for Xth fold of K-fold cross-validation)
-            - `seg_lu_probs_k_X.npy` (Saved segment LU probabilities from output of Xth fold of K-fold cross-validation)
+            - `seg_c_p_c_obia_svm_X.npy` (Saved segment LU probabilities from output of Xth fold of K-fold cross-validation)
             - `per_class_accuracy_average.json` (Average accuracy achieved for each LU class (average refers to average of K-fold cross-validation experiments))
             - `oa_averaged_over_k_folds.json` (Average validation set area correctly labelled (average refers to average of K-fold cross-validation experiments))<br><br>
     - `pixelwise_cnn/` (Contains pixelwise CNN models and files)
         - `48/` (Contains pixelwise CNN model files with window size 48)
             - `Kano/` (Contains model files trained on Kano data)
-                - `Kano_pixelwiseX.h5` (Saved pixelwise CNN model for Xth fold of 5-fold cross-validation)
-                - `Kano_lu_probsX.npy` (Selected pixel LU probabilities output from Xth fold of 5-fold cross-validation)
-                - `Kano_pixel_idx_mapX.npy` (Contains the pixel indexes used to determine which pixels the probabilities in `Kano_lu_probsX.npy` refer to)
+                - `pixelwiseX.h5` (Saved pixelwise CNN model for Xth fold of 5-fold cross-validation)
+                - `pixel_probabilities_pixelwise_X.npy` (Selected pixel LU probabilities output from Xth fold of 5-fold cross-validation)
+                - `pixel_idx_mapX.npy` (Contains the pixel indexes used to determine which pixels the probabilities in `pixel_probabilities_pixelwise_X.npy` refer to)
                 - `per_class_accuracy_average.json` (Average accuracy achieved for each LU class (average refers to average of 5-fold cross-validation experiments))
                 - `oa_averaged_over_k_folds.json` (Average validation set area correctly labelled (average refers to average of 5-fold cross-validation experiments))<br><br>
     - `ocnn` (Contains OCNN models and files)
-        - `32/` (Contains OCNN model files with window size 32)
+        - `48/` (Contains OCNN model files with window size 48)
             - `Kano/` (Contains model files trained on Kano data)
-                - `Kano_multiscale_X_benchmark.h5` (Saved OCNN file for Xth fold of K-fold cross-validation)
-                - `seg_c_p_c_ms_benchmark_X.npy` (Saved segment LU probabilities from OCNN output of Xth fold of K-fold cross-validation)
+                - `multiscale_X_benchmark.h5` (Saved OCNN file for Xth fold of K-fold cross-validation)
+                - `seg_c_p_c_ocnn_X.npy` (Saved segment LU probabilities from OCNN output of Xth fold of K-fold cross-validation)
                 - `benchmark_per_class_accuracy_average.json` (Average accuracy achieved using OCNN for each LU class (average refers to average of K-fold cross-validation experiments))
                 - `benchmark_oa_averaged_over_k_folds.json` (Average validation set area correctly labelled by OCNN (average refers to average of K-fold cross-validation experiments))<br><br>
+    - `adaptive_multiscale` (Contains AMUSE models and files)
+        - `Kano/` (Contains model files trained on Kano data)
+            - `new_data` (Classification results and model data generated by module 2)
+                - `48` (Model data and results generated during running of module 2)
+                    - `multiscale_X.h5` (Saved AMUSE file for Xth fold of K-fold cross-validation)
+                    - `seg_c_p_c_ms_X.npy` (Saved segment LU probabilities from AMUSE output of Xth fold of K-fold cross-validation)
+                    - `per_class_accuracy_average.json` (Average accuracy achieved using AMUSE for each LU class at window size 48 (average refers to average of K-fold cross-validation experiments))
+                    - `oa_averaged_over_k_folds.json` (Average validation set area correctly labelled by AMUSE at window size 48 (average refers to average of K-fold cross-validation experiments))
+            - `temp_data`
+                - `48` (Classification results and model data generated for window size 48 during module 1)
+                    - `0` (Model data and results generated during running of fold 0 for window size)
+            - `temp_shapefiles`
+                - `48` (Shapefiles assigned to window size 48 after module 1 is completed)
+            - `combined_accuracies_over_5_folds_all_ws.json` (Average accuracy achieved using AMUSE for each LU class (average refers to average of K-fold cross-validation experiments). Results are combined across all window sizes used in AMUSE)
+            - `oa_combined_averaged_over_5_folds.json` (Average validation set area correctly labelled by OCNN (average refers to average of K-fold cross-validation experiments). Results are combined across all window sizes used in AMUSE)<br><br>
 - `adaptive_multi_scale.py` (File used to handle the main runtime of the adaptive MS-CNN [AMUSE] system)
 - `config.py` (File used to store global variables which `run.py`, `plotting_functions.py` or `project_metrics.py` might access)
+- `housekeeping.py` (File used to mitigate memory issues when training models on an NVIDIA GPU and a Windows Operating System. Sourced from https://github.com/CallumAltham/Tensorflow-NVIDIA-Fix)
 - `land_classes.py` (File which contains `LandClasses`, `LandCoverClasses` and `LandUseClasses` classes which are used to translate between integer representations of LU and the actual LU class names/colours allocated to them as described by `geo_data/K_R3C4/lu_annotations/classes.json` file or such-like)
 - `main.py` (File used to handle the main menu functionality of the overall system)
 - `mlps.py` (File used to handle mostly unused but potentially important MLP based code)
-- `multi_scale_ocnn.py` (File which contains Keras model describing MS-CNN model and the layers it contains as well as a model named `BenchmarkModel` which is used to act as an OCNN or pixelwise CNN. The `train_multiscale_model` function is used in `run.py`'s `multiscale()` function to train a MS-CNN model and an OCNN model)
-- `ocnns.py` (File used to handle mostly unused but potentially important OCNN based code)
-- `plotting_functions.py` (File which contains many (often very long/messy) functions used to plot figures at various points during the project)
-- `project_metrics.py` (File which has functions to calculate OBIA-SVM/Pixelwise CNN/OCNN/MS-CNN accuracies as well as plot a figure comparing their classification outputs for two specific regions of the Kano data)
+- `multi_scale_ocnn.py` (File containing all code used to generate models based on the MS-CNN and OCNN architectures, including: a singular ms-cnn, a singular ocnn, a ms-cnn and ocnn together. An additional function exists to facilitate ms-cnn training during AMUSE modules)
+- `ocnns.py` (File used to handle mostly unused but potentially important OCNN based code for reference)
+- `plotting_functions.py` (File which contains many (often very long/messy) functions used to plot figures at various points during the project) ** File currently unavailable due to changes being made**
+- `project_metrics.py` (File which has functions to calculate OBIA-SVM/Pixelwise CNN/OCNN/MS-CNN/AMUSE accuracies.)
+- `requirements.txt` (File containing all required packages that can be used by pip package manager to install dependencies, as mentioned above.<br> Note: Some packages such as Rasterio, Fiona, Shapely may require external dependencies that will need to be installed.)
 - `results.py` (Used in the generation of metrics and imagery)
 - `run.py` (File which contains the bulk of classes/functions necessary for training classification models both for LC, LU or both)
 - `window_positioner.py` (File used to compute superpixel locations upon which to apply classification in a fashion similar to the method described in "An object-based convolutional neural network (OCNN) for urban land use classification" by C.Zhang ([http://doi.org/10.1016/j.rse.2018.06.034](http://doi.org/10.1016/j.rse.2018.06.034)))
-- `requirements.txt` (File containing all required packages that can be used by pip package manager to install dependencies, as mentioned above.<br> Note: Some packages such as Rasterio, Fiona, Shapely may require external dependencies that will need to be installed.)
 
-## Variables/objects used
+## Potentially Important Variables/objects used (For Reference)
 
 - `pixel_idx` - from 0 to `config.TIF.shape[0]*config.TIF.shape[1]` (usually 268,435,456), used to refer to a unique pixel within the raster. Pixels are numbered 0, 1, 2, ... along the top row and 16384, 16385, ... along the second row and so on.
 - `segment_idx` - from 0 to #no. segments in `config.SEGMENTATION_SHAPEFILE` (usually 130,078 for Lagos or 307,897 for Kano), used to refer to a unique segment within the raster. Calling `np.argwhere(segment_map==segment_idx).flatten()` will return a np.array containing the `pixel_idx` values of the pixels which make up the segment with id of `segment_idx`.
