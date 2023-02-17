@@ -313,6 +313,7 @@ Shown below is only an example of elements contained within a single folder in e
 
 Other folders are also available within these directories corresponding to alternative window sizes and datasets that can be explored at the readers discretion.
 
+- `installation/` (Wheel files that may be needed to install packages on Windows systems)
 - `figures/` (Directory for created figures) <br>*NOTE: Some figure folders are currently being rearranged in accordance with changes to plotting figures code and therefore this folder is currently unavailable*
     - `architectures/` (Complete MS-CNN Architecture Diagrams)
     <!--- `colored_tiles/` (...)-->
