@@ -1,0 +1,37 @@
+{
+    "0": {
+        "Classname": "Commercial",
+        "Classvalue": 1,
+        "RED": 117,
+        "GREEN": 66,
+        "BLUE": 245
+    },
+    "1": {
+        "Classname": "Residential",
+        "Classvalue": 3,
+        "RED": 223,
+        "GREEN": 0,
+        "BLUE": 3
+    },
+    "2": {
+        "Classname": "Retail",
+        "Classvalue": 4,
+        "RED": 216,
+        "GREEN": 101,
+        "BLUE": 189
+    },
+    "3": {
+        "Classname": "Road",
+        "Classvalue": 5,
+        "RED": 0,
+        "GREEN": 0,
+        "BLUE": 0
+    },
+    "4": {
+        "Classname": "Vegetation",
+        "Classvalue": 6,
+        "RED": 51,
+        "GREEN": 255,
+        "BLUE": 51
+    }
+}

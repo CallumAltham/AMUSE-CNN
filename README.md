@@ -313,7 +313,7 @@ Shown below is only an example of elements contained within a single folder in e
 
 Other folders are also available within these directories corresponding to alternative window sizes and datasets that can be explored at the readers discretion.
 
-- `installation/` (Wheel files that may be needed to install packages on Windows systems)
+- `installation/` (Wheel files that may be needed to install packages on Windows systems)<br><br>
 - `figures/` (Directory for created figures) <br>*NOTE: Some figure folders are currently being rearranged in accordance with changes to plotting figures code and therefore this folder is currently unavailable*
     - `architectures/` (Complete MS-CNN Architecture Diagrams)
     <!--- `colored_tiles/` (...)-->
@@ -336,8 +336,8 @@ Other folders are also available within these directories corresponding to alter
         - `lu_annotations/` (Land use annotations directory)
         - `NI_Kano_19Q2_V0_R6C6.tif` (Data file)
         - `segments.*` (Mean-shift segmentation files/superpixels)<br><br>
-- `raw_data_info\` (Raw information regarding `geo_data` files)
-- `models/` (Directory for saving models)
+- `raw_data_info\` (Raw information regarding `geo_data` files)<br><br>
+- `models/` (Directory for saving models) *Note: .pkl files do not exist in these folders due to the large file size required for storage. These files can be generated per model at runtime. Additionally, these model files may not constitute the highest performing results but instead serve as an example*
     - `multi_scale/` (Contains MS-CNN  models and files)
         - `48/` (Contains MS-CNN model files with window size 48)
             - `Kano/` (Contains model files trained on Kano data)
@@ -354,8 +354,8 @@ Other folders are also available within these directories corresponding to alter
             - `oa_averaged_over_k_folds.json` (Average validation set area correctly labelled (average refers to average of K-fold cross-validation experiments))<br><br>
     - `pixelwise_cnn/` (Contains pixelwise CNN models and files)
         - `48/` (Contains pixelwise CNN model files with window size 48)
-            - `Kano/` (Contains model files trained on Kano data)
-                - `pixelwiseX.h5` (Saved pixelwise CNN model for Xth fold of 5-fold cross-validation)
+            - `lagos/` (Contains model files trained on Kano data)
+                - `pixelwiseX.h5` (Saved pixelwise CNN model for Xth fold of X-fold cross-validation)
                 - `pixel_probabilities_pixelwise_X.npy` (Selected pixel LU probabilities output from Xth fold of 5-fold cross-validation)
                 - `pixel_idx_mapX.npy` (Contains the pixel indexes used to determine which pixels the probabilities in `pixel_probabilities_pixelwise_X.npy` refer to)
                 - `per_class_accuracy_average.json` (Average accuracy achieved for each LU class (average refers to average of 5-fold cross-validation experiments))
