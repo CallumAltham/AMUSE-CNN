@@ -12,6 +12,9 @@ It is not advised to run this code right now and any responsibility will fall on
 
 > :warning:
 
+![AMUSE CNN Visualisation](visualisations/AMUSE_Land_Use_Visualisation.gif "AMUSE CNN Visualisation")
+AMUSE CNN Visualisation
+
 
 ![AMUSE-CNN Architecture](images/amuse_cnn.jpg "AMUSE CNN Architecture")
 AMUSE-CNN Architecture
